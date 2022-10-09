@@ -157,7 +157,56 @@ var Heading = styled("h2", {
     size: "md"
   }
 });
+
+// src/components/Avatar/index.tsx
+import { User } from "phosphor-react";
+
+// src/components/Avatar/styles.ts
+import * as Avatar from "@radix-ui/react-avatar";
+var AvatarContainer = styled(Avatar.Root, {
+  borderRadius: "$full",
+  display: "inline-block",
+  width: "$12",
+  height: "$12",
+  overflow: "hidden"
+});
+var AvatarImage2 = styled(Avatar.AvatarImage, {
+  width: "100%",
+  height: "100%",
+  objectFit: "cover",
+  borderRadius: "inherit"
+});
+var AvatarFallback2 = styled(Avatar.AvatarFallback, {
+  width: "100%",
+  height: "100%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  backgroundColor: "$gray600",
+  color: "$gray800",
+  svg: {
+    width: "$6",
+    height: "$6"
+  }
+});
+
+// src/components/Avatar/index.tsx
+import { jsx, jsxs } from "react/jsx-runtime";
+function Avatar2(props) {
+  return /* @__PURE__ */ jsxs(AvatarContainer, {
+    children: [
+      /* @__PURE__ */ jsx(AvatarImage2, {
+        ...props
+      }),
+      /* @__PURE__ */ jsx(AvatarFallback2, {
+        delayMs: 600,
+        children: /* @__PURE__ */ jsx(User, {})
+      })
+    ]
+  });
+}
 export {
+  Avatar2 as Avatar,
   Box,
   Heading,
   Text
