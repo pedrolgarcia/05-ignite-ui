@@ -400,6 +400,7 @@ var TextArea = styled("textarea", {
     color: "$gray400"
   }
 });
+TextArea.displayName = "TextArea";
 
 // src/components/Checkbox/index.tsx
 var import_phosphor_react2 = require("phosphor-react");
