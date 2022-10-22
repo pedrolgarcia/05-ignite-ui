@@ -1,5 +1,11 @@
 # @pedrolgarcia-ignite-ui/tokens
 
+## 1.1.2
+
+### Patch Changes
+
+- red color
+
 ## 1.1.1
 
 ### Patch Changes
