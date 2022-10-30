@@ -13,7 +13,8 @@ var colors = {
   ignite300: "#00B37E",
   ignite500: "#00875F",
   ignite700: "#015F43",
-  ignite900: "#00291D"
+  ignite900: "#00291D",
+  red: "red"
 };
 var space = {
   1: "0.25rem",
@@ -490,6 +491,133 @@ function MultiStep({ size, currentStep = 1 }) {
   });
 }
 MultiStep.displayName = "MultiStep";
+
+// src/components/Toast/index.tsx
+import { X } from "phosphor-react";
+import { useState } from "react";
+
+// src/components/Toast/styles.ts
+import * as Toast from "@radix-ui/react-toast";
+var VIEWPORT_PADDING = 25;
+var hide = keyframes({
+  "0%": { opacity: 1 },
+  "100%": { opacity: 0 }
+});
+var slideIn2 = keyframes({
+  from: { transform: `translateX(calc(100% + ${VIEWPORT_PADDING}px))` },
+  to: { transform: "translateX(0)" }
+});
+var swipeOut = keyframes({
+  from: { transform: "translateX(var(--radix-toast-swipe-end-x))" },
+  to: { transform: `translateX(calc(100% + ${VIEWPORT_PADDING}px))` }
+});
+var ToastProvider = styled(Toast.Provider, {});
+var ToastContainer = styled(Toast.Root, {
+  backgroundColor: "$gray800",
+  border: "1px solid $gray600",
+  borderRadius: 6,
+  width: "22.5rem",
+  boxShadow: "hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px",
+  padding: "12px 20px",
+  display: "grid",
+  gridTemplateAreas: '"title action" "description action"',
+  gridTemplateColumns: "auto max-content",
+  alignItems: "center",
+  gap: 4,
+  "@media (prefers-reduced-motion: no-preference)": {
+    '&[data-state="open"]': {
+      animation: `${slideIn2} 150ms cubic-bezier(0.16, 1, 0.3, 1)`
+    },
+    '&[data-state="closed"]': {
+      animation: `${hide} 100ms ease-in`
+    },
+    '&[data-swipe="move"]': {
+      transform: "translateX(var(--radix-toast-swipe-move-x))"
+    },
+    '&[data-swipe="cancel"]': {
+      transform: "translateX(0)",
+      transition: "transform 200ms ease-out"
+    },
+    '&[data-swipe="end"]': {
+      animation: `${swipeOut} 100ms ease-out`
+    }
+  }
+});
+var ToastTitle = styled(Toast.Title, {
+  gridArea: "title",
+  marginBottom: 5,
+  fontWeight: "$bold",
+  fontSize: "$xl",
+  fontFamily: "$default",
+  color: "$white",
+  lineHeight: "32px"
+});
+var ToastDescription = styled(Toast.Description, {
+  gridArea: "description",
+  margin: 0,
+  fontWeight: "$regular",
+  fontSize: "$sm",
+  fontFamily: "$default",
+  color: "$gray200",
+  lineHeight: "22.4px"
+});
+var ToastAction = styled(Toast.Action, {
+  gridArea: "action"
+});
+var ToastClose = styled(Toast.Close, {
+  all: "unset",
+  background: "transparent",
+  cursor: "pointer",
+  svg: {
+    fontSize: "$md",
+    color: "$gray200"
+  }
+});
+var ToastViewport = styled(Toast.Viewport, {
+  position: "fixed",
+  bottom: 0,
+  right: 0,
+  display: "flex",
+  flexDirection: "column",
+  padding: VIEWPORT_PADDING,
+  gap: 10,
+  width: 390,
+  maxWidth: "100vw",
+  margin: 0,
+  listStyle: "none",
+  zIndex: 2147483647,
+  outline: "none"
+});
+
+// src/components/Toast/index.tsx
+import { jsx as jsx5, jsxs as jsxs4 } from "react/jsx-runtime";
+function Toast2({ title, description, opened }) {
+  const [open, setOpen] = useState(opened);
+  return /* @__PURE__ */ jsxs4(ToastProvider, {
+    children: [
+      /* @__PURE__ */ jsxs4(ToastContainer, {
+        open,
+        onOpenChange: setOpen,
+        children: [
+          /* @__PURE__ */ jsx5(ToastTitle, {
+            children: title
+          }),
+          /* @__PURE__ */ jsx5(ToastDescription, {
+            children: description
+          }),
+          /* @__PURE__ */ jsx5(ToastAction, {
+            asChild: true,
+            altText: "Close toast",
+            children: /* @__PURE__ */ jsx5(ToastClose, {
+              children: /* @__PURE__ */ jsx5(X, {})
+            })
+          })
+        ]
+      }),
+      /* @__PURE__ */ jsx5(ToastViewport, {})
+    ]
+  });
+}
 export {
   Avatar2 as Avatar,
   Box,
@@ -499,5 +627,6 @@ export {
   MultiStep,
   Text,
   TextArea,
-  TextInput
+  TextInput,
+  Toast2 as Toast
 };
