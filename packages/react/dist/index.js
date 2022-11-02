@@ -559,12 +559,12 @@ var ToastContainer = styled(Toast.Root, {
   borderRadius: 6,
   width: "22.5rem",
   boxShadow: "hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px",
-  padding: "12px 20px",
+  padding: "0.75rem 1.25rem",
   display: "grid",
   gridTemplateAreas: '"title action" "description action"',
   gridTemplateColumns: "auto max-content",
-  alignItems: "center",
   gap: 4,
+  position: "relative",
   "@media (prefers-reduced-motion: no-preference)": {
     '&[data-state="open"]': {
       animation: `${slideIn2} 150ms cubic-bezier(0.16, 1, 0.3, 1)`
@@ -586,7 +586,6 @@ var ToastContainer = styled(Toast.Root, {
 });
 var ToastTitle = styled(Toast.Title, {
   gridArea: "title",
-  marginBottom: 5,
   fontWeight: "$bold",
   fontSize: "$xl",
   fontFamily: "$default",
@@ -609,8 +608,10 @@ var ToastClose = styled(Toast.Close, {
   all: "unset",
   background: "transparent",
   cursor: "pointer",
+  position: "absolute",
+  top: "5px",
+  right: "4px",
   svg: {
-    fontSize: "$md",
     color: "$gray200"
   }
 });
@@ -650,7 +651,9 @@ function Toast2({ title, description, opened }) {
             asChild: true,
             altText: "Close toast",
             children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(ToastClose, {
-              children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(import_phosphor_react3.X, {})
+              children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(import_phosphor_react3.X, {
+                size: 20
+              })
             })
           })
         ]

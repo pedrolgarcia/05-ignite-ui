@@ -27,12 +27,13 @@ export const ToastContainer = styled(Toast.Root, {
   width: '22.5rem',
   boxShadow:
     'hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px',
-  padding: '12px 20px',
+  padding: '0.75rem 1.25rem',
   display: 'grid',
   gridTemplateAreas: '"title action" "description action"',
   gridTemplateColumns: 'auto max-content',
-  alignItems: 'center',
+  // alignItems: 'center',
   gap: 4,
+  position: 'relative',
 
   '@media (prefers-reduced-motion: no-preference)': {
     '&[data-state="open"]': {
@@ -56,7 +57,6 @@ export const ToastContainer = styled(Toast.Root, {
 
 export const ToastTitle = styled(Toast.Title, {
   gridArea: 'title',
-  marginBottom: 5,
   fontWeight: '$bold',
   fontSize: '$xl',
   fontFamily: '$default',
@@ -83,8 +83,11 @@ export const ToastClose = styled(Toast.Close, {
   background: 'transparent',
   cursor: 'pointer',
 
+  position: 'absolute',
+  top: '5px',
+  right: '4px',
+
   svg: {
-    fontSize: '$md',
     color: '$gray200',
   },
 })

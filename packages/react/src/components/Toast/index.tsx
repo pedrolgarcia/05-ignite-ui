@@ -27,7 +27,7 @@ export function Toast({ title, description, opened }: ToastProps) {
 
         <ToastAction asChild altText="Close toast">
           <ToastClose>
-            <X />
+            <X size={20} />
           </ToastClose>
         </ToastAction>
       </ToastContainer>
