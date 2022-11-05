@@ -10,5 +10,13 @@ export const parameters = {
   },
   docs: {
     theme: themes.dark
-  }
+  },
 }
+
+export const decorators = [
+  (Story) => (
+    <div style={{ width: "100%", margin: "3rem" }}>
+      <Story />
+    </div>
+  ),
+];

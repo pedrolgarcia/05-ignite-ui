@@ -1,38 +1,33 @@
-import { X } from 'phosphor-react'
-import { useState, ComponentProps } from 'react'
+import { ComponentProps, ReactNode } from 'react'
 import {
-  TooltipAction,
-  TooltipClose,
-  TooltipContainer,
-  TooltipDescription,
+  TooltipArrow,
+  TooltipContent,
   TooltipProvider,
-  TooltipTitle,
-  TooltipViewport,
+  TooltipRoot,
+  TooltipTrigger,
+  TooltipPortal,
 } from './styles'
 
-export interface TooltipProps extends ComponentProps<typeof TooltipContainer> {
-  title: string
-  description: string
-  opened: boolean
+export interface TooltipProps extends ComponentProps<typeof TooltipContent> {
+  content: string
+  children: ReactNode
 }
 
-export function Tooltip({ title, description, opened }: TooltipProps) {
-  const [open, setOpen] = useState(opened)
-
+export function Tooltip({ content, children, ...props }: TooltipProps) {
   return (
     <TooltipProvider>
-      <TooltipContainer open={open} onOpenChange={setOpen}>
-        <TooltipTitle>{title}</TooltipTitle>
-        <TooltipDescription>{description}</TooltipDescription>
+      <TooltipRoot>
+        <TooltipTrigger asChild>{children}</TooltipTrigger>
 
-        <TooltipAction asChild altText="Close Tooltip">
-          <TooltipClose>
-            <X size={20} />
-          </TooltipClose>
-        </TooltipAction>
-      </TooltipContainer>
-
-      <TooltipViewport />
+        <TooltipPortal>
+          <TooltipContent {...props}>
+            {content}
+            <TooltipArrow />
+          </TooltipContent>
+        </TooltipPortal>
+      </TooltipRoot>
     </TooltipProvider>
   )
 }
+
+Tooltip.displayName = 'Tooltip'

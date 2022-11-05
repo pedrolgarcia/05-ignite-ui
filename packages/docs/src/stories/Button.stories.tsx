@@ -25,7 +25,7 @@ export default {
       },
     },
     disabled: {
-      controle: {
+      control: {
         type: 'boolean',
       },
     },

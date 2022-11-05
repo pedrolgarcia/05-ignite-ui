@@ -35,7 +35,8 @@ __export(src_exports, {
   Text: () => Text,
   TextArea: () => TextArea,
   TextInput: () => TextInput,
-  Toast: () => Toast2
+  Toast: () => Toast2,
+  Tooltip: () => Tooltip
 });
 module.exports = __toCommonJS(src_exports);
 
@@ -662,6 +663,81 @@ function Toast2({ title, description, opened }) {
     ]
   });
 }
+
+// src/components/Tooltip/styles.ts
+var import_react4 = require("@stitches/react");
+var TooltipPrimitive = __toESM(require("@radix-ui/react-tooltip"));
+var slideUpAndFade = (0, import_react4.keyframes)({
+  "0%": { opacity: 0, transform: "translateY(2px)" },
+  "100%": { opacity: 1, transform: "translateY(0)" }
+});
+var slideRightAndFade = (0, import_react4.keyframes)({
+  "0%": { opacity: 0, transform: "translateX(-2px)" },
+  "100%": { opacity: 1, transform: "translateX(0)" }
+});
+var slideDownAndFade = (0, import_react4.keyframes)({
+  "0%": { opacity: 0, transform: "translateY(-2px)" },
+  "100%": { opacity: 1, transform: "translateY(0)" }
+});
+var slideLeftAndFade = (0, import_react4.keyframes)({
+  "0%": { opacity: 0, transform: "translateX(2px)" },
+  "100%": { opacity: 1, transform: "translateX(0)" }
+});
+var TooltipContent = styled(TooltipPrimitive.Content, {
+  borderRadius: 5,
+  padding: "0.75rem 1rem",
+  lineHeight: "$short",
+  color: "$gray100",
+  fontFamily: "$default",
+  fontSize: "$sm",
+  fontWeight: "$medium",
+  backgroundColor: "$gray900",
+  boxShadow: "hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px",
+  userSelect: "none",
+  "@media (prefers-reduced-motion: no-preference)": {
+    animationDuration: "400ms",
+    animationTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+    willChange: "transform, opacity",
+    '&[data-state="delayed-open"]': {
+      '&[data-side="top"]': { animationName: slideDownAndFade },
+      '&[data-side="right"]': { animationName: slideLeftAndFade },
+      '&[data-side="bottom"]': { animationName: slideUpAndFade },
+      '&[data-side="left"]': { animationName: slideRightAndFade }
+    }
+  }
+});
+var TooltipArrow = styled(TooltipPrimitive.Arrow, {
+  fill: "$gray900"
+});
+var TooltipProvider = TooltipPrimitive.Provider;
+var TooltipRoot = TooltipPrimitive.Root;
+var TooltipTrigger = TooltipPrimitive.Trigger;
+var TooltipPortal = TooltipPrimitive.Portal;
+
+// src/components/Tooltip/index.tsx
+var import_jsx_runtime6 = require("react/jsx-runtime");
+function Tooltip({ content, children, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(TooltipProvider, {
+    children: /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(TooltipRoot, {
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(TooltipTrigger, {
+          asChild: true,
+          children
+        }),
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(TooltipPortal, {
+          children: /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(TooltipContent, {
+            ...props,
+            children: [
+              content,
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(TooltipArrow, {})
+            ]
+          })
+        })
+      ]
+    })
+  });
+}
+Tooltip.displayName = "Tooltip";
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   Avatar,
@@ -673,5 +749,6 @@ function Toast2({ title, description, opened }) {
   Text,
   TextArea,
   TextInput,
-  Toast
+  Toast,
+  Tooltip
 });

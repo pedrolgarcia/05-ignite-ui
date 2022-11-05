@@ -621,6 +621,81 @@ function Toast2({ title, description, opened }) {
     ]
   });
 }
+
+// src/components/Tooltip/styles.ts
+import { keyframes as keyframes3 } from "@stitches/react";
+import * as TooltipPrimitive from "@radix-ui/react-tooltip";
+var slideUpAndFade = keyframes3({
+  "0%": { opacity: 0, transform: "translateY(2px)" },
+  "100%": { opacity: 1, transform: "translateY(0)" }
+});
+var slideRightAndFade = keyframes3({
+  "0%": { opacity: 0, transform: "translateX(-2px)" },
+  "100%": { opacity: 1, transform: "translateX(0)" }
+});
+var slideDownAndFade = keyframes3({
+  "0%": { opacity: 0, transform: "translateY(-2px)" },
+  "100%": { opacity: 1, transform: "translateY(0)" }
+});
+var slideLeftAndFade = keyframes3({
+  "0%": { opacity: 0, transform: "translateX(2px)" },
+  "100%": { opacity: 1, transform: "translateX(0)" }
+});
+var TooltipContent = styled(TooltipPrimitive.Content, {
+  borderRadius: 5,
+  padding: "0.75rem 1rem",
+  lineHeight: "$short",
+  color: "$gray100",
+  fontFamily: "$default",
+  fontSize: "$sm",
+  fontWeight: "$medium",
+  backgroundColor: "$gray900",
+  boxShadow: "hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px",
+  userSelect: "none",
+  "@media (prefers-reduced-motion: no-preference)": {
+    animationDuration: "400ms",
+    animationTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+    willChange: "transform, opacity",
+    '&[data-state="delayed-open"]': {
+      '&[data-side="top"]': { animationName: slideDownAndFade },
+      '&[data-side="right"]': { animationName: slideLeftAndFade },
+      '&[data-side="bottom"]': { animationName: slideUpAndFade },
+      '&[data-side="left"]': { animationName: slideRightAndFade }
+    }
+  }
+});
+var TooltipArrow = styled(TooltipPrimitive.Arrow, {
+  fill: "$gray900"
+});
+var TooltipProvider = TooltipPrimitive.Provider;
+var TooltipRoot = TooltipPrimitive.Root;
+var TooltipTrigger = TooltipPrimitive.Trigger;
+var TooltipPortal = TooltipPrimitive.Portal;
+
+// src/components/Tooltip/index.tsx
+import { jsx as jsx6, jsxs as jsxs5 } from "react/jsx-runtime";
+function Tooltip({ content, children, ...props }) {
+  return /* @__PURE__ */ jsx6(TooltipProvider, {
+    children: /* @__PURE__ */ jsxs5(TooltipRoot, {
+      children: [
+        /* @__PURE__ */ jsx6(TooltipTrigger, {
+          asChild: true,
+          children
+        }),
+        /* @__PURE__ */ jsx6(TooltipPortal, {
+          children: /* @__PURE__ */ jsxs5(TooltipContent, {
+            ...props,
+            children: [
+              content,
+              /* @__PURE__ */ jsx6(TooltipArrow, {})
+            ]
+          })
+        })
+      ]
+    })
+  });
+}
+Tooltip.displayName = "Tooltip";
 export {
   Avatar2 as Avatar,
   Box,
@@ -631,5 +706,6 @@ export {
   Text,
   TextArea,
   TextInput,
-  Toast2 as Toast
+  Toast2 as Toast,
+  Tooltip
 };
