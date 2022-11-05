@@ -6,6 +6,9 @@ import { colors } from '@pedrolgarcia-ignite-ui/tokens'
 export default {
   title: 'Form/Tooltip',
   component: Tooltip,
+  parameters: {
+    layout: 'centered',
+  },
   args: {
     content: 'Mais informações aqui',
     side: 'top',

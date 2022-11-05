@@ -5,6 +5,9 @@ import { ArrowRight } from 'phosphor-react'
 export default {
   title: 'Form/Button',
   component: Button,
+  parameters: {
+    layout: 'centered',
+  },
   args: {
     children: 'Send',
     variant: 'primary',
