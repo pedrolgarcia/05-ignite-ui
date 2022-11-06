@@ -635,7 +635,10 @@ var ToastViewport = styled(Toast.Viewport, {
 // src/components/Toast/index.tsx
 var import_jsx_runtime5 = require("react/jsx-runtime");
 function Toast2({ title, description, opened }) {
-  const [open, setOpen] = (0, import_react3.useState)(opened);
+  const [open, setOpen] = (0, import_react3.useState)(false);
+  (0, import_react3.useEffect)(() => {
+    setOpen(opened);
+  }, [opened]);
   return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(ToastProvider, {
     children: [
       /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(ToastContainer, {

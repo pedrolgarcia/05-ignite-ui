@@ -1,5 +1,5 @@
 import { X } from 'phosphor-react'
-import { useState, ComponentProps } from 'react'
+import { useState, ComponentProps, useEffect } from 'react'
 import {
   ToastAction,
   ToastClose,
@@ -17,7 +17,11 @@ export interface ToastProps extends ComponentProps<typeof ToastContainer> {
 }
 
 export function Toast({ title, description, opened }: ToastProps) {
-  const [open, setOpen] = useState(opened)
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    setOpen(opened)
+  }, [opened])
 
   return (
     <ToastProvider>

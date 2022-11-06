@@ -494,7 +494,7 @@ MultiStep.displayName = "MultiStep";
 
 // src/components/Toast/index.tsx
 import { X } from "phosphor-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // src/components/Toast/styles.ts
 import * as Toast from "@radix-ui/react-toast";
@@ -593,7 +593,10 @@ var ToastViewport = styled(Toast.Viewport, {
 // src/components/Toast/index.tsx
 import { jsx as jsx5, jsxs as jsxs4 } from "react/jsx-runtime";
 function Toast2({ title, description, opened }) {
-  const [open, setOpen] = useState(opened);
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    setOpen(opened);
+  }, [opened]);
   return /* @__PURE__ */ jsxs4(ToastProvider, {
     children: [
       /* @__PURE__ */ jsxs4(ToastContainer, {
